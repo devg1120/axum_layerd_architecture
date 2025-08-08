@@ -1,0 +1,6 @@
+
+sudo systemctl status postgresql
+sudo systemctl stop postgresql
+
+docker compose -f postgresql_compose.yml up -d
+docker compose -f postgresql_compose.yml stop
