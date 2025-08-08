@@ -1,0 +1,141 @@
+
+stock-metrics
+
+Rust の新しい HTTP サーバーのクレート Axum をフルに活用してサーバーサイドアプリケーション開発をしてみる
+
+https://blog-dry.com/entry/2021/12/26/002649
+
+
+https://github.com/yuk1ty/stock-metrics
+
+============================================
+
+cd local-middleware
+docker compose up -d
+
+
+----
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_server
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: test_stock
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: Asia/Tokyo
+----
+port:3306
+
+
+cd migrations/
+
+$ sudo apt install mysql-client-core-8.0 
+$ mysql --version
+mysql  Ver 8.0.42-0ubuntu0.24.04.2 for Linux on x86_64 ((Ubuntu))
+
+mysql -u [MySQLのユーザ名] -p db_name < /Users/user_name/Desktop/example.sql
+
+# mysql login
+mysql -u docker -p -h 127.0.0.1 --port 3306 -D test_stock  
+
+# mysql import
+mysql -u docker -p -h 127.0.0.1 --port 3306 -D test_stock  < ./20220416013137_init.sql
+
+cd ..
+
+# DATABASE_URL=mysql://root:password@localhost/test_stock
+
+export RUST_LOG=debug
+export DATABASE_URL=mysql://docker:docker@localhost:3306/test_stock
+
+cargo run
+
+
+pub async fn startup(modules: Arc<Modules>) {
+    let hc_router = Router::new()
+        .route("/", get(hc))
+        .route("/db", get(hc_db))
+        .route("/dynamo", get(hc_dynamo));
+    let stocks_router = Router::new()
+        .route("/", post(create_stock))
+        .route("/:id", get(stock_view));
+    let market_kind_router = Router::new()
+        .route("/", post(create_market_kind))
+        .route("/:id", delete(delete_market_kind));
+    let market_data_router = Router::new()
+        .route("/:stock_id", post(upload_market_data));
+
+    let app = Router::new()
+        .nest("/hc", hc_router)
+        .nest("/stocks", stocks_router)
+        .nest("/market_kind", market_kind_router)
+        .nest("/market_data", market_data_router)
+        .layer(AddExtensionLayer::new(modules));
+
+    let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
+
+
+=================================
+# mysql login
+mysql -u docker -p -h 127.0.0.1 --port 3306 -D test_stock
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| test_stock         |
++--------------------+
+
+
+mysql> use test_stock;
+Database changed
+
+mysql> show tables;
++----------------------+
+| Tables_in_test_stock |
++----------------------+
+| market_kind          |
+| schema_migrations    |
+| stock                |
++----------------------+
+3 rows in set (0.06 sec)
+
+mysql> SELECT * FROM stock;
+
+mysql> SELECT * FROM  market_kind;
+mysql> SELECT * FROM  market_data;
+
+==========================================
+stock-metrics-app/src/model
+
+pub struct CreateMarketKind {
+    pub code: String,
+    pub name: String,
+}
+
+pub struct MarketData {
+    pub stock_id: String,
+    pub as_of: Date<Local>,
+    pub start_price: f32,
+    pub end_price: f32,
+    pub high_price: f32,
+    pub low_price: f32,
+}
+
+pub struct CreateStock {
+    pub name: String,
+    pub ticker_symbol: String,
+    pub market_kind: String,
+}
+
+pub struct StockView {
+    pub id: String,
+    pub name: String,
+    pub ticker_symbol: String,
+    pub market_kind_name: String,
+}
+
+-----------------------------------------

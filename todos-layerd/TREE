@@ -1,0 +1,31 @@
+.
+├── _allget.sh
+├── Cargo.lock
+├── Cargo.toml
+├── _delete.sh
+├── docker-compose.yml
+├── Dockerfile
+├── _get.sh
+├── Makefile
+├── _patch.sh
+├── _post.sh
+├── README.md
+├── src
+│   ├── handlers.rs
+│   ├── main.rs
+│   └── repositories.rs
+├── todos-adapter
+│   ├── Cargo.toml
+│   └── src
+├── todos-app
+│   ├── Cargo.toml
+│   └── src
+├── todos-controller
+│   ├── Cargo.toml
+│   └── src
+├── todos-domain
+│   ├── Cargo.toml
+│   └── src
+└── TREE
+
+10 directories, 19 files

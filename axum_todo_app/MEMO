@@ -1,0 +1,71 @@
+Rustのaxumでtodoアプリを作る
+https://zenn.dev/keisuke333/books/0f0f69120f1bdd
+
+cd pg
+docker compose up -d  -f postgresql_compose.yml 
+
+
+cd ..
+---
+[dependencies]
+sqlx = { version = "0.8.3", features = ["postgres", "runtime-tokio-rustls", "uuid", "chrono"] }
+---
+
+cargo install sqlx-cli --no-default-features --features postgres
+
+cd pg
+sqlx database create
+
+docker exec -it todo-db psql -U todo_user -d todo_db
+
+todo_db=# \l                                                       List of databases
+
+   Name    |   Owner   | Encoding | Locale Provider |  Collate   |   Ctype    | ICU Locale | ICU Rules |    Access privileges    
+-----------+-----------+----------+-----------------+------------+------------+------------+-----------+-------------------------
+ postgres  | todo_user | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | 
+ template0 | todo_user | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | =c/todo_user           +
+           |           |          |                 |            |            |            |           | todo_user=CTc/todo_user
+ template1 | todo_user | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | =c/todo_user           +
+           |           |          |                 |            |            |            |           | todo_user=CTc/todo_user
+ todo_db   | todo_user | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | 
+(4 rows)
+
+
+sqlx migrate add create_todos
+
+migrations/20250226120000_create_todos.up.sql
+---
+CREATE TABLE todos (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid (),
+    title TEXT NOT NULL,
+    description TEXT,
+    completed BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT (now() AT TIME ZONE 'Asia/Tokyo') NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT (now() AT TIME ZONE 'Asia/Tokyo') NOT NULL
+);
+---
+
+sqlx migrate run
+
+docker exec -it todo-db psql -U todo_user -d todo_db
+todo_db=# \dt
+               List of relations
+ Schema |       Name       | Type  |   Owner   
+--------+------------------+-------+-----------
+ public | _sqlx_migrations | table | todo_user
+ public | todos            | table | todo_user
+(2 rows)
+
+todo_db=# \d todos
+                                          Table "public.todos"
+   Column    |           Type           | Collation | Nullable |                 Default                 
+-------------+--------------------------+-----------+----------+-----------------------------------------
+ id          | uuid                     |           | not null | gen_random_uuid()
+ title       | text                     |           | not null | 
+ description | text                     |           |          | 
+ completed   | boolean                  |           | not null | false
+ created_at  | timestamp with time zone |           | not null | (now() AT TIME ZONE 'Asia/Tokyo'::text)
+ updated_at  | timestamp with time zone |           | not null | (now() AT TIME ZONE 'Asia/Tokyo'::text)
+Indexes:
+    "todos_pkey" PRIMARY KEY, btree (id)
+
