@@ -1,0 +1,10 @@
+id:devg1120@gmail.com
+pass:sakiko1120
+hash:$2y$10$7OhPIJMsNJn1h6c2BMGFU.F1wLQVQD7Ut5h0WRBdx5x4UVB33eU2.
+
+CREATE TABLE users (id int primary key not null,email text not null, password_hash text not null);
+
+insert into users (id,email,password_hash) values (1,'devg1120@gmail.com','$2y$10$7OhPIJMsNJn1h6c2BMGFU.F1wLQVQD7Ut5h0WRBdx5x4UVB33eU2.');
+
+
+

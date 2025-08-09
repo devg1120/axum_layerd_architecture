@@ -1,0 +1,10 @@
+https://qiita.com/raiga0310/items/f3793dbb29c7bd069b8c
+
+
+cargo run --bin sse_example
+
+cargo run --bin  sse_client
+
+
+opem http://127.0.0.1:3001/
+

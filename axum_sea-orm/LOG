@@ -1,0 +1,26 @@
+2025-08-09T02:23:16.520381Z DEBUG sea_orm::database::transaction: CREATE TABLE IF NOT EXISTS "seaql_migrations" ( "version" varchar NOT NULL PRIMARY KEY, "applied_at" bigint NOT NULL )
+2025-08-09T02:23:20.151406Z  WARN sqlx::query: slow statement: execution time exceeded alert threshold summary="CREATE TABLE IF NOT …" db.statement="\n\nCREATE TABLE IF NOT EXISTS \"seaql_migrations\" ( \"version\" varchar NOT NULL PRIMARY KEY, \"applied_at\" bigint NOT NULL )\n" rows_affected=0 rows_returned=0 elapsed=3.630696566s elapsed_secs=3.630696566 slow_threshold=1s
+2025-08-09T02:23:20.151670Z  INFO sea_orm_migration::migrator: Applying all pending migrations
+2025-08-09T02:23:20.151881Z DEBUG sea_orm::database::transaction: CREATE TABLE IF NOT EXISTS "seaql_migrations" ( "version" varchar NOT NULL PRIMARY KEY, "applied_at" bigint NOT NULL )
+2025-08-09T02:23:20.153152Z  INFO sqlx::postgres::notice: relation "seaql_migrations" already exists, skipping
+2025-08-09T02:23:20.153358Z  INFO sqlx::query: summary="CREATE TABLE IF NOT …" db.statement="\n\nCREATE TABLE IF NOT EXISTS \"seaql_migrations\" ( \"version\" varchar NOT NULL PRIMARY KEY, \"applied_at\" bigint NOT NULL )\n" rows_affected=0 rows_returned=0 elapsed=1.273659ms elapsed_secs=0.001273659
+2025-08-09T02:23:20.153668Z DEBUG sea_orm::database::transaction: CREATE TABLE IF NOT EXISTS "seaql_migrations" ( "version" varchar NOT NULL PRIMARY KEY, "applied_at" bigint NOT NULL )
+2025-08-09T02:23:20.154698Z  INFO sqlx::postgres::notice: relation "seaql_migrations" already exists, skipping
+2025-08-09T02:23:20.154910Z  INFO sqlx::query: summary="CREATE TABLE IF NOT …" db.statement="\n\nCREATE TABLE IF NOT EXISTS \"seaql_migrations\" ( \"version\" varchar NOT NULL PRIMARY KEY, \"applied_at\" bigint NOT NULL )\n" rows_affected=0 rows_returned=0 elapsed=1.089195ms elapsed_secs=0.001089195
+2025-08-09T02:23:20.155309Z DEBUG sea_orm::database::transaction: CREATE TABLE IF NOT EXISTS "seaql_migrations" ( "version" varchar NOT NULL PRIMARY KEY, "applied_at" bigint NOT NULL )
+2025-08-09T02:23:20.156288Z  INFO sqlx::postgres::notice: relation "seaql_migrations" already exists, skipping
+2025-08-09T02:23:20.156503Z  INFO sqlx::query: summary="CREATE TABLE IF NOT …" db.statement="\n\nCREATE TABLE IF NOT EXISTS \"seaql_migrations\" ( \"version\" varchar NOT NULL PRIMARY KEY, \"applied_at\" bigint NOT NULL )\n" rows_affected=0 rows_returned=0 elapsed=1.037856ms elapsed_secs=0.001037856
+2025-08-09T02:23:20.156915Z DEBUG sea_orm::database::transaction: SELECT "version", "applied_at" FROM "seaql_migrations" ORDER BY "version" ASC
+2025-08-09T02:23:20.166132Z  INFO sqlx::query: summary="SELECT \"version\", \"applied_at\" FROM …" db.statement="\n\nSELECT \"version\", \"applied_at\" FROM \"seaql_migrations\" ORDER BY \"version\" ASC\n" rows_affected=0 rows_returned=0 elapsed=8.814125ms elapsed_secs=0.008814125
+2025-08-09T02:23:20.166625Z  INFO sea_orm_migration::migrator: Applying migration 'm20220120_000001_create_post_table'
+2025-08-09T02:23:20.166823Z DEBUG sea_orm::database::transaction: CREATE TABLE IF NOT EXISTS "posts" ( "id" serial NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "text" varchar NOT NULL )
+2025-08-09T02:23:20.380263Z  INFO sqlx::query: summary="CREATE TABLE IF NOT …" db.statement="\n\nCREATE TABLE IF NOT EXISTS \"posts\" ( \"id\" serial NOT NULL PRIMARY KEY, \"title\" varchar NOT NULL, \"text\" varchar NOT NULL )\n" rows_affected=0 rows_returned=0 elapsed=213.231413ms elapsed_secs=0.213231413
+2025-08-09T02:23:20.380484Z  INFO sea_orm_migration::migrator: Migration 'm20220120_000001_create_post_table' has been applied
+2025-08-09T02:23:20.380740Z DEBUG sea_orm::database::transaction: INSERT INTO "seaql_migrations" ("version", "applied_at") VALUES ('m20220120_000001_create_post_table', 1754706200) RETURNING "version"
+2025-08-09T02:23:20.383900Z  INFO sqlx::query: summary="INSERT INTO \"seaql_migrations\" (\"version\", …" db.statement="\n\nINSERT INTO \"seaql_migrations\" (\"version\", \"applied_at\") VALUES ($1, $2) RETURNING \"version\"\n" rows_affected=1 rows_returned=1 elapsed=2.680417ms elapsed_secs=0.002680417
+2025-08-09T02:23:20.440651Z  INFO sqlx::query: summary="COMMIT" db.statement="" rows_affected=0 rows_returned=0 elapsed=56.399048ms elapsed_secs=0.056399048
+2025-08-09T02:23:20.441479Z DEBUG globset: glob converted to regex: Glob { glob: "**/*", re: "(?-u)^(?:/?|.*/)[^/]*$", opts: GlobOptions { case_insensitive: false, literal_separator: true, backslash_escape: true, empty_alternates: false }, tokens: Tokens([RecursivePrefix, ZeroOrMore]) }    
+2025-08-09T02:23:20.441623Z DEBUG globset: built glob set; 0 literals, 0 basenames, 0 extensions, 0 prefixes, 0 suffixes, 0 required extensions, 1 regexes    
+
+
+
