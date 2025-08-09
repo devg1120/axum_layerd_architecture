@@ -1,3 +1,3 @@
-curl http://localhost:3000/api/todos
+curl http://localhost:3000/api/todos 
 echo ""
 

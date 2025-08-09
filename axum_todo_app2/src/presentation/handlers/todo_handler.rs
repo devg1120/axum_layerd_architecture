@@ -26,8 +26,10 @@ pub fn create_todo_router<T: TodoService + Send + Sync + 'static + Clone>(todo_s
 
     Router::new()
         .route("/todos", get(get_all_todos::<T>).post(create_todo::<T>))
-        .route("/todos/{id}", get(get_todo_by_id::<T>)
+        //.route("/todos/{id}", get(get_todo_by_id::<T>)
+        .route("/todos/:id", get(get_todo_by_id::<T>)
             .put(update_todo::<T>)
+            .patch(patch_todo::<T>)
             .delete(delete_todo::<T>))
         .with_state(state)
 }
@@ -47,6 +49,10 @@ struct UpdateTodoRequest {
     completed: bool,
 }
 
+#[derive(Deserialize)]
+struct PatchTodoRequest {
+    completed: bool,
+}
 // ✅ レスポンス用 DTO
 #[derive(Serialize)]
 struct TodoResponse {
@@ -113,6 +119,18 @@ async fn update_todo<T: TodoService>(
     }
 }
 
+// ✅ Todo を部分更新
+async fn patch_todo<T: TodoService>(
+    State(state): State<AppState<T>>,
+    Path(id): Path<Uuid>,
+    Json(payload): Json<PatchTodoRequest>,
+) -> impl IntoResponse {
+    match state.todo_service.patch_todo(id, payload.completed).await {
+        Ok(todo) => Json(TodoResponse::from(todo)).into_response(),
+        Err(sqlx::Error::RowNotFound) => (StatusCode::NOT_FOUND, "Todo not found").into_response(),
+        Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Failed to update todo").into_response(),
+    }
+}
 // ✅ Todo を削除
 async fn delete_todo<T: TodoService>(
     State(state): State<AppState<T>>,

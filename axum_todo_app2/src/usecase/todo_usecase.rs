@@ -20,6 +20,7 @@ pub trait TodoService {
     async fn get_todo_by_id(&self, id: Uuid) -> Result<Option<Todo>, sqlx::Error>;
     async fn create_todo(&self, title: String, description: String) -> Result<Todo, sqlx::Error>;
     async fn update_todo(&self, id: Uuid, title: String, description: String, completed: bool) -> Result<Todo, sqlx::Error>;
+    async fn patch_todo(&self, id: Uuid,  completed: bool) -> Result<Todo, sqlx::Error>;
     async fn delete_todo(&self, id: Uuid) -> Result<(), sqlx::Error>;
 }
 
@@ -43,6 +44,15 @@ impl<T: TodoRepository + Send + Sync + Clone> TodoService for TodoUsecase<T> {
         if let Some(mut todo) = existing_todo {
             todo.title = title;
             todo.description = Some(description);
+            todo.completed = completed;
+            return self.repository.update(todo).await;
+        }
+        Err(sqlx::Error::RowNotFound)
+    }
+
+    async fn patch_todo(&self, id: Uuid,  completed: bool) -> Result<Todo, sqlx::Error> {
+        let existing_todo = self.repository.find_by_id(id).await?;
+        if let Some(mut todo) = existing_todo {
             todo.completed = completed;
             return self.repository.update(todo).await;
         }

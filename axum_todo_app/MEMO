@@ -70,3 +70,40 @@ todo_db=# \d todos
 Indexes:
     "todos_pkey" PRIMARY KEY, btree (id)
 
+===================================================================
+利用再開手順
+
+cd pg
+docker compose -f postgresql_compose.yml up -d
+
+cd ..
+cargo run
+cd _curl
+
+$ ./_get.sh 
+[]
+
+$ ./_post.sh 
+{"id":"e741be77-ed21-4476-8967-22c59899bcc9","text":"Rustの勉強","completed":false}_curl
+
+$ ./_post2.sh  ABCSEF12345
+{"id":"a8ac295b-00e9-442a-a67a-faf9af45c963","text":"ABCSEF12345","completed":false}
+
+
+$ ./_get.sh 
+[{"id":"a8ac295b-00e9-442a-a67a-faf9af45c963","text":"ABCSEF12345","completed":false},
+ {"id":"e741be77-ed21-4476-8967-22c59899bcc9","text":"Rustの勉強","completed":false}]
+
+$ ./_delete.sh a8ac295b-00e9-442a-a67a-faf9af45c963
+
+$ ./_get.sh 
+[{"id":"e741be77-ed21-4476-8967-22c59899bcc9","text":"Rustの勉強","completed":false}]
+
+$ ./_patch.sh e741be77-ed21-4476-8967-22c59899bcc9
+{"id":"e741be77-ed21-4476-8967-22c59899bcc9","text":"Rustの勉強","completed":true}
+
+$ ./_get.sh 
+[{"id":"e741be77-ed21-4476-8967-22c59899bcc9","text":"Rustの勉強","completed":true}]
+
+ 
+
