@@ -1,0 +1,10 @@
+**/*.rs.bk
+**/target
+**/Cargo.lock
+**/.env
+.idea/
+.vscode/
+coverage/
+
+**/*.db-shm
+**/*.db-wal

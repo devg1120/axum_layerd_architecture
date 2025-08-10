@@ -1,0 +1,367 @@
+.
+├── MEMO
+├── TREE
+├── auth_login
+│   ├── MEMO
+│   └── axum-login-demo
+│       ├── Cargo.lock
+│       ├── Cargo.toml
+│       ├── MEMO
+│       ├── README.md
+│       ├── USER
+│       ├── assets
+│       │   ├── NotFound.html
+│       │   ├── index.html
+│       │   ├── style.css
+│       │   └── unauthorized.html
+│       ├── sqlite
+│       │   ├── create_db.py
+│       │   ├── dump_db.py
+│       │   ├── insert_db.py
+│       │   ├── users.db
+│       │   └── users.db.org
+│       └── src
+│           ├── 1
+│           └── main.rs
+├── axum_sea-orm
+│   ├── Cargo.lock
+│   ├── Cargo.toml
+│   ├── LOG
+│   ├── README.md
+│   ├── Screenshot.png
+│   ├── api
+│   │   ├── Cargo.toml
+│   │   ├── src
+│   │   │   ├── flash.rs
+│   │   │   └── lib.rs
+│   │   ├── static
+│   │   │   ├── css
+│   │   │   │   ├── normalize.css
+│   │   │   │   ├── skeleton.css
+│   │   │   │   └── style.css
+│   │   │   └── images
+│   │   │       └── favicon.png
+│   │   └── templates
+│   │       ├── edit.html.tera
+│   │       ├── error
+│   │       │   └── 404.html.tera
+│   │       ├── index.html.tera
+│   │       ├── layout.html.tera
+│   │       └── new.html.tera
+│   ├── entity
+│   │   ├── Cargo.toml
+│   │   └── src
+│   │       ├── lib.rs
+│   │       └── post.rs
+│   ├── migration
+│   │   ├── Cargo.toml
+│   │   ├── README.md
+│   │   └── src
+│   │       ├── lib.rs
+│   │       ├── m20220120_000001_create_post_table.rs
+│   │       └── main.rs
+│   ├── pg
+│   │   ├── MEMO
+│   │   ├── migrations
+│   │   │   ├── 20250808064445_create_todos_down.sql
+│   │   │   └── 20250808064445_create_todos_up.sql
+│   │   └── postgresql_compose.yml
+│   ├── seeder
+│   │   ├── Cargo.toml
+│   │   ├── README.md
+│   │   └── src
+│   │       ├── lib.rs
+│   │       ├── m20250629_081733_post_seeder.rs
+│   │       └── main.rs
+│   ├── service
+│   │   ├── Cargo.toml
+│   │   ├── src
+│   │   │   ├── lib.rs
+│   │   │   ├── mutation.rs
+│   │   │   └── query.rs
+│   │   └── tests
+│   │       ├── mock.rs
+│   │       └── prepare.rs
+│   └── src
+│       └── main.rs
+├── axum_todo_app
+│   ├── Cargo.lock
+│   ├── Cargo.toml
+│   ├── MEMO
+│   ├── _curl
+│   │   ├── _delete.sh
+│   │   ├── _get.sh
+│   │   ├── _patch.sh
+│   │   ├── _post.sh
+│   │   └── _post2.sh
+│   ├── pg
+│   │   ├── MEMO
+│   │   ├── migrations
+│   │   │   ├── 20250808064445_create_todos_down.sql
+│   │   │   └── 20250808064445_create_todos_up.sql
+│   │   └── postgresql_compose.yml
+│   └── src
+│       └── main.rs
+├── axum_todo_app2
+│   ├── Cargo.lock
+│   ├── Cargo.toml
+│   ├── MEMO
+│   ├── MEMO2
+│   ├── _curl
+│   │   ├── _delete_id.sh
+│   │   ├── _get.sh
+│   │   ├── _get_id.sh
+│   │   ├── _patch.sh
+│   │   ├── _post.sh
+│   │   ├── _post2.sh
+│   │   └── _put.sh
+│   ├── pg
+│   │   ├── MEMO
+│   │   ├── migrations
+│   │   │   ├── 20250808064445_create_todos_down.sql
+│   │   │   └── 20250808064445_create_todos_up.sql
+│   │   └── postgresql_compose.yml
+│   └── src
+│       ├── domain
+│       │   ├── mod.rs
+│       │   ├── models
+│       │   │   ├── mod.rs
+│       │   │   └── todo.rs
+│       │   └── repositories
+│       │       ├── mod.rs
+│       │       └── todo_repository.rs
+│       ├── infrastructure
+│       │   ├── db.rs
+│       │   ├── mod.rs
+│       │   └── todo_repository.rs
+│       ├── main.rs
+│       ├── presentation
+│       │   ├── handlers
+│       │   │   ├── mod.rs
+│       │   │   └── todo_handler.rs
+│       │   └── mod.rs
+│       └── usecase
+│           ├── mod.rs
+│           └── todo_usecase.rs
+├── rust-axum-seaorm-postgres-example
+│   ├── Cargo.lock
+│   ├── Cargo.toml
+│   ├── Dockerfile
+│   ├── Makefile
+│   ├── README.md
+│   ├── docker-compose.yml
+│   ├── migration
+│   │   ├── Cargo.lock
+│   │   ├── Cargo.toml
+│   │   ├── README.md
+│   │   └── src
+│   │       ├── lib.rs
+│   │       ├── m20240202_124954_create_table_users.rs
+│   │       ├── m20240202_125007_create_table_todos.rs
+│   │       └── main.rs
+│   └── src
+│       ├── domain
+│       │   ├── mod.rs
+│       │   ├── prelude.rs
+│       │   ├── todos.rs
+│       │   └── users.rs
+│       └── main.rs
+├── sse_axum
+│   ├── Cargo.lock
+│   ├── Cargo.toml
+│   ├── MEMO
+│   ├── README.md
+│   └── src
+│       ├── client.rs
+│       └── main.rs
+├── stock-metrics
+│   ├── Cargo.toml
+│   ├── MEMO
+│   ├── README.md
+│   ├── _get.sh
+│   ├── _post.sh
+│   ├── local-middleware
+│   │   └── docker-compose.yaml
+│   ├── migrations
+│   │   ├── 20220416013137_init.sql
+│   │   └── down.sql
+│   ├── py_tools
+│   │   ├── _get.sh
+│   │   ├── data.csv
+│   │   ├── data.json
+│   │   ├── market_data_post.py
+│   │   ├── market_kind_post.py
+│   │   └── stocks_post.py
+│   ├── rust-toolchain
+│   ├── sample.env
+│   ├── stock-metrics-adapter
+│   │   ├── Cargo.toml
+│   │   └── src
+│   │       ├── lib.rs
+│   │       ├── model
+│   │       │   ├── market_kind.rs
+│   │       │   ├── mod.rs
+│   │       │   └── stock.rs
+│   │       ├── modules.rs
+│   │       ├── persistence
+│   │       │   ├── dynamodb.rs
+│   │       │   ├── mod.rs
+│   │       │   └── mysql.rs
+│   │       └── repository
+│   │           ├── health_check.rs
+│   │           ├── market_data.rs
+│   │           ├── market_kind.rs
+│   │           ├── mod.rs
+│   │           └── stock.rs
+│   ├── stock-metrics-app
+│   │   ├── Cargo.toml
+│   │   └── src
+│   │       ├── lib.rs
+│   │       ├── model
+│   │       │   ├── market_data.rs
+│   │       │   ├── market_kind.rs
+│   │       │   ├── mod.rs
+│   │       │   ├── stock.rs
+│   │       │   └── stock_view.rs
+│   │       └── usecase
+│   │           ├── health_check.rs
+│   │           ├── market_data.rs
+│   │           ├── market_kind.rs
+│   │           ├── mod.rs
+│   │           ├── stock.rs
+│   │           └── stock_view.rs
+│   ├── stock-metrics-driver
+│   │   ├── Cargo.toml
+│   │   └── src
+│   │       ├── bin
+│   │       │   └── bootstrap.rs
+│   │       ├── context
+│   │       │   ├── axum_helper.rs
+│   │       │   ├── errors.rs
+│   │       │   ├── mod.rs
+│   │       │   └── validate.rs
+│   │       ├── lib.rs
+│   │       ├── model
+│   │       │   ├── market_data.rs
+│   │       │   ├── market_kind.rs
+│   │       │   ├── mod.rs
+│   │       │   ├── stock.rs
+│   │       │   └── stock_view.rs
+│   │       ├── module
+│   │       │   └── mod.rs
+│   │       ├── routes
+│   │       │   ├── health.rs
+│   │       │   ├── market_data.rs
+│   │       │   ├── market_kind.rs
+│   │       │   ├── mod.rs
+│   │       │   └── stock_view.rs
+│   │       └── startup
+│   │           └── mod.rs
+│   └── stock-metrics-kernel
+│       ├── Cargo.toml
+│       └── src
+│           ├── lib.rs
+│           ├── model
+│           │   ├── market_data.rs
+│           │   ├── market_kind
+│           │   │   └── value.rs
+│           │   ├── market_kind.rs
+│           │   ├── mod.rs
+│           │   ├── stock
+│           │   │   └── ticker_symbol.rs
+│           │   └── stock.rs
+│           └── repository
+│               ├── market_data.rs
+│               ├── market_kind.rs
+│               ├── mod.rs
+│               └── stock.rs
+├── todos-layerd
+│   ├── Cargo.lock
+│   ├── Cargo.toml
+│   ├── Dockerfile
+│   ├── MEMO
+│   ├── Makefile
+│   ├── README.md
+│   ├── TREE
+│   ├── _allget.sh
+│   ├── _delete.sh
+│   ├── _get.sh
+│   ├── _patch.sh
+│   ├── _post.sh
+│   ├── docker-compose.yml
+│   ├── src
+│   │   ├── handlers.rs
+│   │   ├── main.rs
+│   │   └── repositories.rs
+│   ├── todos-adapter
+│   │   ├── Cargo.toml
+│   │   └── src
+│   │       ├── lib.rs
+│   │       ├── model
+│   │       │   ├── mod.rs
+│   │       │   └── todo.rs
+│   │       └── repository
+│   │           ├── health.rs
+│   │           ├── mod.rs
+│   │           └── todo.rs
+│   ├── todos-app
+│   │   ├── Cargo.toml
+│   │   └── src
+│   │       ├── lib.rs
+│   │       └── usecase
+│   │           ├── mod.rs
+│   │           └── todo.rs
+│   ├── todos-controller
+│   │   ├── Cargo.toml
+│   │   └── src
+│   │       ├── handler
+│   │       │   ├── health.rs
+│   │       │   ├── mod.rs
+│   │       │   └── todo.rs
+│   │       ├── lib.rs
+│   │       ├── main.rs
+│   │       ├── module
+│   │       │   └── mod.rs
+│   │       └── setup
+│   │           └── mod.rs
+│   └── todos-domain
+│       ├── Cargo.toml
+│       └── src
+│           ├── lib.rs
+│           ├── model
+│           │   ├── mod.rs
+│           │   └── todo.rs
+│           └── repository
+│               ├── mod.rs
+│               └── todo.rs
+└── tower-sessions
+    ├── CHANGELOG.md
+    ├── Cargo.toml
+    ├── LICENSE
+    ├── README.md
+    ├── examples
+    │   ├── counter-extractor.rs
+    │   ├── counter.rs
+    │   ├── signed.rs
+    │   └── strongly-typed.rs
+    ├── memory-store
+    │   ├── Cargo.toml
+    │   └── src
+    │       └── lib.rs
+    ├── rustfmt.toml
+    ├── src
+    │   ├── lib.rs
+    │   └── service.rs
+    ├── tests
+    │   ├── common
+    │   │   └── mod.rs
+    │   └── integration-tests.rs
+    └── tower-sessions-core
+        ├── Cargo.toml
+        └── src
+            ├── extract.rs
+            ├── lib.rs
+            ├── session.rs
+            └── session_store.rs
+
+103 directories, 261 files

@@ -6,3 +6,4 @@ https://qiita.com/nokonoko_1203/items/57fbbdddbf7975a1d803
 # stock-metrics/
 
 https://blog-dry.com/entry/2021/12/26/002649
+tree -I target .

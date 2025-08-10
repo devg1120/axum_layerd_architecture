@@ -1,0 +1,4 @@
+[workspace]
+default-members = ["axum-login"]
+resolver = "2"
+members = ["axum-login", "examples/*"]

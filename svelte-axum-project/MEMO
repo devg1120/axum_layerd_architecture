@@ -1,0 +1,17 @@
+
+cd front_end
+yarn
+build
+cd ..
+
+cargo update
+cargo run
+open http://127.0.0.1:8080/
+
+login   
+   id: jas
+   password: hello
+
+
+
+

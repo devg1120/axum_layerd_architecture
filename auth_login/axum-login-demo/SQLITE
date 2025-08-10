@@ -1,0 +1,4 @@
+sqlite3 sqlite/users.db
+> select * from users;
+> .quit
+
