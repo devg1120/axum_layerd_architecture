@@ -7,3 +7,15 @@ AxumでのExtensionの使い方 - ミドルウェアとデータを共有する 
 https://github.com/mikezupper/axum-login-demo
 
 
+$ apt install python3.12-venv
+$ python3 -m venv venv
+$ source ./venv/bin/activate
+(venv) auth_login/
+$ pip install "passlib[argon2]"
+$ pip install bcrypt
+
+
+$ python3 hash_password.py   test999
+password      : test999
+bcrypt_hash_password: $2b$12$sdl6VZCwWBcUUHqSPvWB0uVsXUoiQPdrd2MdzrNY6NOln/Eak3ZMa
+argon2_hash_password: $argon2id$v=19$m=65536,t=3,p=4$RGgtZaxVKiXEeI8RovSe0w$O+j24HiezglCljdozjna6hZOqRmZu2ikgVB7fXRjbhQ

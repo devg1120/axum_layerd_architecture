@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "memory-store", "tower-sessions-core"]
+members = [".", "examples/tower-sessions-demo", "memory-store", "tower-sessions-core"]
 resolver = "2"
 
 [workspace.package]

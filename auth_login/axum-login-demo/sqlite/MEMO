@@ -1,0 +1,12 @@
+python3 create_db.py 
+
+python3 insert_db.py [id]  [email] [password]
+python3 insert_db.py   1 ferris@crab.domain  ferris
+python3 insert_db.py   2 devg1120@gmail.com  test999
+
+
+sqlite3 users.db
+> select * from users;
+> .quit
+
+
