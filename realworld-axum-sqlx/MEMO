@@ -1,0 +1,155 @@
+cargo install sqlx-cli --features postgres
+
+
+docker run -d --name postgres-14 -p 5432:5432 -e POSTGRES_PASSWORD={password} postgres:14
+
+sqlx db setup
+
+cargo run
+
+cd realworld-frontend/
+yarn 
+npm run dev
+
+open http://127.0.0.1:3000/
+
+--------------------------------------
+$ psql -h 127.0.0.1 -p 5432 -U postgres
+Password for user postgres: {password}
+
+postgres#
+postgres=# \l
+                                                           List of databases
+        Name         |  Owner   | Encoding | Locale Provider |  Collate   |   Ctype    | ICU Locale | ICU Rules |   Access privileges   
+---------------------+----------+----------+-----------------+------------+------------+------------+-----------+-----------------------
+ postgres            | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | 
+ realworld_axum_sqlx | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | 
+ template0           | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | =c/postgres          +
+                     |          |          |                 |            |            |            |           | postgres=CTc/postgres
+ template1           | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | =c/postgres          +
+                     |          |          |                 |            |            |            |           | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \c realworld_axum_sqlx
+realworld_axum_sqlx=# \dt;
+              List of relations
+ Schema |       Name       | Type  |  Owner   
+--------+------------------+-------+----------
+ public | _sqlx_migrations | table | postgres
+ public | article          | table | postgres
+ public | article_comment  | table | postgres
+ public | article_favorite | table | postgres
+ public | follow           | table | postgres
+ public | user2             | table | postgres
+(6 rows)
+
+select * from user2;
+
+-----------------------------------
+database init
+  docker ps -a
+  docker rm [container-id]
+-----------------------------------
+https://qiita.com/H-A-L/items/fe8cb0e0ee0041ff3ceb
+PostgreSQLの基本的なコマンド
+
+データベース
+データベース一覧の表示
+\l
+
+データベースの選択
+\c データベース名
+
+テーブル
+テーブル一覧の表示
+\dt;
+
+テーブル構造の表示
+\d テーブル名;
+
+テーブル内のデータを一覧
+select * from テーブル名;
+
+指定したカラムの内容を小さい順に表示
+select * from テーブル名 order by カラム;
+
+指定したカラムの内容を大きい順に表示
+select * from テーブル名 order by カラム desc;
+
+表示数指定
+select * from テーブル名 limit 数;
+
+表示の開始位置指定
+select * from テーブル名 offset 数;
+
+カラム内の任意の文字を表示
+select distinct カラム名 from テーブル名;
+
+カラム内の合計値
+select sum(カラム名) from テーブル名;
+
+カラム内の最大値
+select max(カラム名) from テーブル名;
+
+カラム内の最小値
+select min(カラム名) from テーブル名;
+
+カラム内の平均値
+select avg(カラム名) from テーブル名;
+
+データの更新
+update テーブル名 set 更新内容;
+
+データの削除
+delete from テーブル名 where 条件;
+
+テーブルのオーナーの変更
+alter table テーブル名 owner to オーナー名;
+
+関数
+文字数
+select length(カラム名) from テーブル名;
+
+文字列連結
+select concat(文字列, 文字列, ...) from テーブル名;
+
+テーブル構造の変更
+カラムの追加
+alter table テーブル名 add カラム名 データ型;
+
+カラムの削除
+alter table テーブル名 drop カラム名;
+
+カラム名の変更
+alter table テーブル名 rename カラム名 to 新カラム名;
+
+カラムのデータ型を変更する
+alter table テーブル名 alter カラム名 type データ型;
+
+インデックス
+インデックス追加
+create index インデックス名 on テーブル名(カラム名);
+
+インデックス削除
+drop index インデックス名;
+
+view
+viewの作成
+create view ビュー名 as viewに指定するコマンド;
+
+view一覧の確認
+\dv;
+
+viewの使用方法
+select * from ビュー名;
+
+viewの削除
+drop view ビュー名;
+
+外部ファイルの読み込み
+SQL文を外部ファイルに書いて実行する時に使う
+\i ファイル名
+
+
+
+
