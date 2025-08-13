@@ -1,0 +1,73 @@
+
+https://github.com/rbatis/abs_admin       // backend
+https://github.com/rbatis/abs_admin_vue   // frontend
+
+
+vi application.json5 
+  db_url: "sqlite://target/sqlite.db",
+
+cargo run
+
+open http://127.0.0.1:8000/
+
+# Login
+// abs_admin/src/domain/table/tables_init.rs 
+user:  00000000000
+password: 123456
+
+hash_password: e10adc3949ba59abbe56e057f20f883e   // md5
+
+# Register
+   mobile :19059757863
+
+   Get code
+
+    POST http://127.0.0.1:8000/admin/sms 405 (Method Not Allowed)
+  
+    axum側 api /admin/sms  未実装
+
+# abs_admin_vue  [FRONTEND]
+  #frontend local 
+     npm run dev
+     open http://127.0.0.1:8001/
+
+  # backend->front
+     npm run build
+     static content :  abs_admin_vue/dist/
+     open http://127.0.0.1:8000/
+------------------------------------------------------
+python3 -m venv venv
+source ./venv/bin/activate
+pip install bcrypt
+pip install passlib
+pip install argon2_cffi
+
+$ python3 hash_password.py 123456
+password      : 123456
+bcrypt_hash_password: $2b$12$hXYYjkJuiT2up5LhNXeq1O16kMtVJ7inGPIkEoXXR5dn1wf5uIJKu
+argon2_hash_password: $argon2id$v=19$m=65536,t=3,p=4$da51jhFC6H2PsVbq/X/v3Q$qVMA3Lz19myb7rWPzIWjg2xCAzvR1I0vQz1WA8kCLFU
+md5_hash_password   : e10adc3949ba59abbe56e057f20f883e
+------------------------------------------------------
+cd target
+sqlite3  sqlite.db 
+------------------------------------------------------
+sqlite> .tables
+rbac_permission       rbac_user_role        sys_user            
+rbac_role             sys_dict            
+rbac_role_permission  sys_trash
+
+sqlite> select * from sys_user;
+1|00000000000|e10adc3949ba59abbe56e057f20f883e|admin|PasswordCheck|1|2025-08-13T04:25:05.264292724Z
+
+sqlite> .quit
+
+
+-------------------------------------------------------------
+frontend change
+
+./src/main.rs:        
+
+.fallback_service( ServeDir::new("dist/").not_found_service(ServeFile::new("dist/index.html")));
+->
+.fallback_service( ServeDir::new("abs_admin_vue/dist/").not_found_service(ServeFile::new("abs_admin_vue/dist/index.html")));
+
